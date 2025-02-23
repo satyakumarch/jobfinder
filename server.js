@@ -4,8 +4,11 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
  import  mongoose  from "mongoose";
-// import { config } from "dotenv/types";
  import connect  from "./db/connect.js";
+ import fs from "fs";
+import { Session } from "inspector/promises";
+//  import route from "./routes/userRoutes.js";
+
 dotenv.config();
 
 const app=express();
@@ -33,6 +36,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(auth(config));
+
+// //routes
+const routeFiles=fs.readdirSync("./routes");
+
+routeFiles.forEach((file)=>{
+import (`./routes/${file}`)
+    .then((route)=>{
+        app.use(route.default);
+    })
+    .catch((error)=>{
+        console.log("Error importing route",error);
+    });
+});
+// Dynamic route import
+
+
+// app.get("/random",(req,res)=>{ 
+//     res.json({random:Math.random()});
+// });
+
 
 const server=async()=>{
     try{
