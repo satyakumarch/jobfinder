@@ -3,10 +3,10 @@ import  { auth } from "express-openid-connect";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
- import  mongoose  from "mongoose";
- import connect  from "./db/connect.js";
- import fs from "fs";
-import { Session } from "inspector/promises";
+import  mongoose  from "mongoose";
+import connect  from "./db/connect.js";
+import fs from "fs";
+// import { Session } from "inspector/promises";
 //  import route from "./routes/userRoutes.js";
 
 dotenv.config();
@@ -41,8 +41,7 @@ app.use(auth(config));
 const routeFiles=fs.readdirSync("./routes");
 
 routeFiles.forEach((file)=>{
-import (`./routes/${file}`)
-    .then((route)=>{
+import (`./routes/${file}`) .then((route)=>{
         app.use(route.default);
     })
     .catch((error)=>{
@@ -50,12 +49,6 @@ import (`./routes/${file}`)
     });
 });
 // Dynamic route import
-
-
-// app.get("/random",(req,res)=>{ 
-//     res.json({random:Math.random()});
-// });
-
 
 const server=async()=>{
     try{

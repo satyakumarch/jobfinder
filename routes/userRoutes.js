@@ -3,6 +3,7 @@
 // app object that correspond ...
 
 import express from 'express';
+import { auth } from 'express-openid-connect';
 
 const router=express.Router();
 
