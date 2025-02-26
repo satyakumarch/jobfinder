@@ -3,8 +3,8 @@
 // app object that correspond ...
 
 import express from 'express';
-// import { auth } from 'express-openid-connect';
-import { getUserProfile } from '../controllers/userController.js';
+import { auth } from 'express-openid-connect';
+import { getUserProfile } from '../controllers/userController';
 
 
 const router = express.Router();
